@@ -22,7 +22,7 @@ class actions
         'numberposts' => -1,
         'tax_query' => array(
             array(
-                'taxonomy' => 'academic_year',
+                'taxonomy' => TAX_ROLLOVER_ACADEMIC_YEARS_ID,
                 'field' => 'term_id',
                 'terms' => $target_tax, /// Where term_id of Term 1 is "1".
                 'include_children' => false

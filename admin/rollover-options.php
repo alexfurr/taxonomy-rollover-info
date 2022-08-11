@@ -17,6 +17,7 @@ if(isset($_GET['rollover']) )
             "new_tax" => $_POST['new_tax'],
         );
         \taxonomy_rollover\actions::rollover_content($args);
+
     }
 
 }
@@ -80,6 +81,64 @@ echo '</table>';
 echo '<input type="submit" value="Submit" class="button-primary"/>';
 echo '</form>';
 
+
+
+function get_academic_years ( $number = false, $start_year_slug = false )
+{
+    $ordered        = array();
+    $unordered      = array();
+    $academic_years = array();
+
+    $query_args = array(
+        'taxonomy'   => TAX_ROLLOVER_ACADEMIC_YEARS_ID,
+        'hide_empty' => false,
+        'number'     => 20,
+    );
+    $terms = get_terms( $query_args );
+
+    if ( is_array( $terms ) ) {
+
+        foreach ( $terms as $term ) {
+            $id = intval( $term->term_id );
+            $order = 0;
+
+
+            $term->sort_order = $order;
+        }
+
+        ksort( $ordered );
+        foreach ( $terms as $term ) {
+            $id = intval( $term->term_id );
+            $academic_years[ $id ] = $term;
+        }
+    }
+
+
+    $academic_years_filtered = array();
+
+    if ( $start_year_slug ) {
+        $found_first = false;
+        foreach ( $academic_years as $term ) {
+            $id = intval( $term->term_id );
+            if ( ! $found_first ) {
+                if ( $term->slug === $start_year_slug ) {
+                    $academic_years_filtered[ $id ] = $term;
+                    $found_first = true;
+                }
+            } else {
+                $academic_years_filtered[ $id ] = $term;
+            }
+        }
+    } else {
+        $academic_years_filtered = $academic_years;
+    }
+
+    if ( $number ) {
+        $academic_years_filtered = array_slice( $academic_years_filtered, 0, $number, true );
+    }
+
+    return $academic_years_filtered;
+}
 
 
 ?>

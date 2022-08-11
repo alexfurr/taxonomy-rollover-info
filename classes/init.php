@@ -14,6 +14,7 @@ class init
     public static function init ()
     {
         if ( is_admin() ) {
+
             add_action( 'admin_menu',  __NAMESPACE__.'\init::register_admin_menu_pages', 100 );
 		}
 
@@ -33,7 +34,7 @@ class init
 		$menu_title='Taxonomy Rollover';
 		$menu_slug=TAX_ROLLOVER_MENU_SLUG;
 		$function=  __NAMESPACE__.'\init::draw_rollover_page';
-		$capability = 'manage_network';
+		$capability = 'delete_pages';
 		//$scripts_function	= 'f2_init::addscripts_dashboard_home';
 		add_submenu_page($parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function);
 

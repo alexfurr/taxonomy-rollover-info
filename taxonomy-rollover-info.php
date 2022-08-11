@@ -21,20 +21,11 @@ include_once( TAX_ROLLOVER_PLUGIN_DIR . '/classes/init.php' );
 include_once( TAX_ROLLOVER_PLUGIN_DIR . '/classes/class-actions.php' );
 
 define( 'TAX_ROLLOVER_MENU_SLUG', 'taxonomy-rollover-admin' );
-define( 'TAX_ROLLOVER_ACADEMIC_YEARS_ID', 'academic_year' ); // the term id
+define( 'TAX_ROLLOVER_ACADEMIC_YEARS_ID', 'years' ); // the term id
 
 
-
-// Confif
-$psa_version  = "0.1"; // Increment this to force load new versions of JS and CSS
 
 \taxonomy_rollover\init::init();
 
-/* Some dummy questions
-PWS-1 :- 181
-PWS-2 :- 210
-PWS-3 :- 213
-PWS-4 :- 233
-*/
 
 ?>
